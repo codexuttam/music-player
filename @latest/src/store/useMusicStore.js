@@ -34,31 +34,36 @@ const useMusicStore = create((set, get) => ({
   },
 
   nextSong: () => {
-    const { audio, currentSongIndex } = get();
-    const nextIndex = (currentSongIndex + 1) % musicList.length;
+    const audio = get().audio;
     if (audio) {
-      audio.src = musicList[nextIndex].src;
-      audio.play();
+      audio.pause();
+      audio.currentTime = 0;
     }
-    set({ currentSongIndex: nextIndex, isPlaying: true });
+    set((state) => ({
+      isPlaying: false,
+      currentSongIndex: (state.currentSongIndex + 1) % state.musicList.length,
+    }));
+    setTimeout(() => set({ isPlaying: true }), 0);
   },
-
   prevSong: () => {
-    const { audio, currentSongIndex } = get();
-    const prevIndex =
-      currentSongIndex === 0 ? musicList.length - 1 : currentSongIndex - 1;
+    const audio = get().audio;
     if (audio) {
-      audio.src = musicList[prevIndex].src;
-      audio.play();
+      audio.pause();
+      audio.currentTime = 0;
     }
-    set({ currentSongIndex: prevIndex, isPlaying: true });
+    set((state) => ({
+      isPlaying: false,
+      currentSongIndex:
+        (state.currentSongIndex - 1 + state.musicList.length) % state.musicList.length,
+    }));
+    setTimeout(() => set({ isPlaying: true }), 0);
   },
 
   setCurrentTime: (time) => {
-    const { audio } = get();
+    set({ currentTime: time });
+    const audio = get().audio;
     if (audio) {
       audio.currentTime = time;
-      set({ currentTime: time });
     }
   },
 }));

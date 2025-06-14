@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
+import useMusicStore from "../store/useMusicStore";
 import SongDetails from "./SongDetails";
 import Controls from "./Controls";
-import useMusicStore from "../store/useMusicStore";
 
 const MusicPlayer = () => {
-  const { initAudio, musicList, currentSongIndex } = useMusicStore();
+  const { initAudio, musicList, currentSongIndex, isPlaying } = useMusicStore();
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -12,6 +12,16 @@ const MusicPlayer = () => {
       initAudio(audioRef.current);
     }
   }, [initAudio]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (isPlaying) {
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+  }, [currentSongIndex, isPlaying]);
 
   if (!musicList || musicList.length === 0) {
     return <div>No songs available.</div>;
@@ -33,3 +43,14 @@ const MusicPlayer = () => {
 };
 
 export default MusicPlayer;
+nextSong: () => {
+  const audio = get().audio;
+  if (audio) {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+  set((state) => ({
+    currentSongIndex: (state.currentSongIndex + 1) % state.musicList.length,
+    isPlaying: true,
+  }));
+};

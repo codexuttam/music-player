@@ -34,7 +34,6 @@ const SongDetails = () => {
     <div className="flex flex-col items-center">
      
       <div className="relative mb-4 flex items-center justify-center">
-        {/* Tremble effect behind the image */}
         <div
           className="absolute w-36 h-36 rounded-full bg-cyan-400 opacity-40 blur-2xl bass-tremble"
           style={{ zIndex: 0 }}

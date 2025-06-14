@@ -13,16 +13,16 @@ const Controls = () => {
     toggleSong,
     nextSong,
     prevSong,
+    audio,
+    initAudio,
   } = useMusicStore();
 
   const handleProgressChange = (event) => {
-    const progressBar = event.target;
-    const rect = progressBar.getBoundingClientRect();
-    const offsetX = event.clientX - rect.left;
-    const width = rect.width;
-    const percentage = offsetX / width;
-    const newTime = percentage * duration; 
+    const newTime = Number(event.target.value);
     setCurrentTime(newTime);
+    if (audio) {
+      audio.currentTime = newTime;
+    }
   };
 
   return (
@@ -68,6 +68,6 @@ const Controls = () => {
       </div>
     </>
   );
-}
+};
 
-export default Controls
+export default Controls;
