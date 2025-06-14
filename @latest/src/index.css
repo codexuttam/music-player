@@ -1,15 +1,44 @@
 @import "tailwindcss";
 
-.glow-ring{
-  filter: blur(7px);
-  
+.glass-card {
+  background: rgba(30, 41, 59, 0.7);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
-.glow-button{
+
+.glow-ring {
+  filter: blur(7px);
+}
+
+.glow-button {
   position: relative;
   z-index: 10;
-  box-shadow: 0 0 10px rgba(81, 246, 122, 0.5), 0 0 20px rgba(81, 246, 122, 0.5), 
-              0 0 30px rgba(81, 246, 122, 0.5), 
-              0 0 40px rgba(81, 246, 122, 0.5);  
+  box-shadow: 0 0 10px 2px #51f67a, 0 0 20px 4px #51f67a, 0 0 30px 8px #51f67a;
+  background: linear-gradient(90deg, #51f67a 0%, #38bdf8 100%);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.glow-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px 4px #51f67a, 0 0 40px 8px #38bdf8;
+}
+
+@keyframes bass-tremble {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.08); }
+  40% { transform: scale(0.96); }
+  60% { transform: scale(1.06); }
+  80% { transform: scale(0.98); }
+}
+.bass-tremble {
+  animation: bass-tremble 1s infinite;
 }
 
 

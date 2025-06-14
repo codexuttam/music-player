@@ -33,21 +33,17 @@ const SongDetails = () => {
   return (
     <div className="flex flex-col items-center">
      
-      <div className="relative w-36 h-36 rounded-full">
-        
+      <div className="relative mb-4 flex items-center justify-center">
+        {/* Tremble effect behind the image */}
+        <div
+          className="absolute w-36 h-36 rounded-full bg-cyan-400 opacity-40 blur-2xl bass-tremble"
+          style={{ zIndex: 0 }}
+        ></div>
         <img
           src={currentSong.img}
           alt={currentSong.title}
-          ref={diskRef}
-          style={{
-            transform: `rotate(${rotation}deg)`,
-          }}
-          className="absolute w-full h-full object-cover object-center z-20 rounded-full"
-        />
-        <div
-          className={`absolute top-[-5%] left-[-5%] rounded-full glow-ring w-[110%] h-[110%] bg-gradient-to-r from-green-300 to-blue-400 opacity-30 ${
-            isPlaying ? "animate-pulse" : "animate-none"
-          }`}
+          className="w-32 h-32 rounded-full object-cover border-4 border-cyan-400 shadow-lg relative"
+          style={{ zIndex: 1 }}
         />
       </div>
 

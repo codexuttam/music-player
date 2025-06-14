@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import SongDetails from "./SongDetails";
 import Controls from "./Controls";
 import useMusicStore from "../store/useMusicStore";
@@ -8,34 +7,25 @@ const MusicPlayer = () => {
   const { initAudio, musicList, currentSongIndex } = useMusicStore();
   const audioRef = useRef(null);
 
-  // Prevent error if musicList is undefined or empty
+  useEffect(() => {
+    if (audioRef.current) {
+      initAudio(audioRef.current);
+    }
+  }, [initAudio]);
+
   if (!musicList || musicList.length === 0) {
     return <div>No songs available.</div>;
   }
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (audio) {
-      initAudio(audio);
-      audio.src = musicList[currentSongIndex].src;
-    }
-  }, []);
+  const currentSong = musicList[currentSongIndex];
 
   return (
-    <div className="p-10 bg-gray-800 rounded-xl shadow-xl w-80">
-      <div className="w-full flex items-center justify-between mb-10">
-        <div className=""> - </div>
-        <p className="">Playing Now</p>
-        <button className="">
-          <HiOutlineMenuAlt3 className=" text-2xl" />
-        </button>
-      </div>
-
+    <div className="p-8 flex flex-col items-center w-96 mx-auto bg-gray-900 rounded-3xl shadow-2xl border-2 border-cyan-500">
       <SongDetails />
       <Controls />
-
       <audio
         ref={audioRef}
+        src={currentSong.src}
         onEnded={() => useMusicStore.getState().nextSong()}
       />
     </div>

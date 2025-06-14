@@ -28,16 +28,8 @@ const Controls = () => {
   return (
     <>
       <div className="relative h-1 bg-gray-700 rounded mb-4">
-        <div
-          className="absolute top-0 left-0 h-full bg-green-500 shadow-sm shadow-green-500 rounded"
-          style={{ width: `${(currentTime / duration) * 100}%` }} 
-        >
-          <span className=" absolute right-0 top-[-100%] w-3 h-3 bg-green-300 rounded-full"></span>
-        </div>
-        <div className=" flex items-center justify-between pt-2">
-          <span> {formatTime(currentTime)} </span>
-          <span> {formatTime(duration)} </span>
-        </div>
+       
+     
 
         <div
           className="absolute top-0 left-0 w-full h-full cursor-pointer"
@@ -46,27 +38,32 @@ const Controls = () => {
         />
       </div>
 
-      <div className="flex justify-around items-center mt-10">
-        <button onClick={prevSong} className=" ">
-          <FaStepBackward className=" hover:text-green-600 duration-300" />
+      <div className="flex items-center justify-between w-full mt-4">
+        <span className="text-lg font-bold text-cyan-200">
+          {formatTime(currentTime)}
+        </span>
+        <input
+          type="range"
+          min={0}
+          max={duration}
+          value={currentTime}
+          onChange={handleProgressChange}
+          className="mx-4 flex-1 accent-cyan-400 h-2"
+        />
+        <span className="text-lg font-bold text-cyan-200">
+          {formatTime(duration)}
+        </span>
+      </div>
+
+      <div className="flex items-center justify-center space-x-6 mt-6">
+        <button onClick={prevSong} className="text-3xl text-cyan-400 hover:text-cyan-200">
+          <FaStepBackward />
         </button>
-
-        <div className="flex items-center justify-center">
-          <button
-            onClick={toggleSong}
-            className="relative p-4 bg-white rounded-full shadow-lg glow-button"
-          >
-            {isPlaying ? (
-              <FaPause className="text-black" />
-            ) : (
-              <FaPlay className="text-black" />
-            )}{" "}
-            <div className="absolute inset-0 rounded-full animate-pulse bg-gradient-to-r from-green-300 to-green-700 opacity-30 glow-ring"></div>
-          </button>
-        </div>
-
-        <button onClick={nextSong} className=" ">
-          <FaStepForward className=" hover:text-green-600 duration-300" />
+        <button onClick={toggleSong} className="text-4xl text-cyan-400 hover:text-cyan-200">
+          {isPlaying ? <FaPause /> : <FaPlay />}
+        </button>
+        <button onClick={nextSong} className="text-3xl text-cyan-400 hover:text-cyan-200">
+          <FaStepForward />
         </button>
       </div>
     </>
