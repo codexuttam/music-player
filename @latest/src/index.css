@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+.glow-ring{
+  filter: blur(7px);
+  
+}
+.glow-button{
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 0 10px rgba(81, 246, 122, 0.5), 0 0 20px rgba(81, 246, 122, 0.5), 
+              0 0 30px rgba(81, 246, 122, 0.5), 
+              0 0 40px rgba(81, 246, 122, 0.5);  
+}
+
+
+
