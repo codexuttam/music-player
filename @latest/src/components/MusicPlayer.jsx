@@ -1,21 +1,25 @@
-import React, { useEffect, useRef } from 'react'
-import { HiOutlineMenuAlt3 } from 'react-icons/hi';
-import SongDetails from './SongDetails';
-import Controls from './Controls';
-import useMusicStore from '../store/useMusicStore';
+import React, { useEffect, useRef } from "react";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import SongDetails from "./SongDetails";
+import Controls from "./Controls";
+import useMusicStore from "../store/useMusicStore";
 
 const MusicPlayer = () => {
-  const { initAudio, musicLists, currentSongIndex } = useMusicStore();
+  const { initAudio, musicList, currentSongIndex } = useMusicStore();
   const audioRef = useRef(null);
+
+  // Prevent error if musicList is undefined or empty
+  if (!musicList || musicList.length === 0) {
+    return <div>No songs available.</div>;
+  }
 
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
       initAudio(audio);
-      audio.src = musicLists[currentSongIndex].src; 
+      audio.src = musicList[currentSongIndex].src;
     }
   }, []);
-
 
   return (
     <div className="p-10 bg-gray-800 rounded-xl shadow-xl w-80">
@@ -32,10 +36,10 @@ const MusicPlayer = () => {
 
       <audio
         ref={audioRef}
-        onEnded={() => useMusicStore.getState().nextSong()} 
+        onEnded={() => useMusicStore.getState().nextSong()}
       />
     </div>
   );
-}
+};
 
-export default MusicPlayer
+export default MusicPlayer;

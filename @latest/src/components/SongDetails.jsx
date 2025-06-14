@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import useMusicStore from '../store/useMusicStore';
 
 const SongDetails = () => {
-  const {currentSongIndex,musicLists,isPlaying} =  useMusicStore()
+  const {currentSongIndex, musicList, isPlaying} =  useMusicStore()
 
   const diskRef = useRef(null); 
 
-  const currentSong = musicLists[currentSongIndex];
+  const currentSong = musicList[currentSongIndex];
 
 
   const [rotation, setRotation] = useState(0);

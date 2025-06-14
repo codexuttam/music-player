@@ -6,8 +6,8 @@ const App = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-800 text-gray-300">
       <MusicPlayer />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 

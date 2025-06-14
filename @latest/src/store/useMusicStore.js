@@ -1,5 +1,5 @@
+import musicList from "../data/musicList";
 import { create } from "zustand";
-import musicLists from "../data/musicLists";
 
 const useMusicStore = create((set, get) => ({
   isPlaying: false,
@@ -7,8 +7,8 @@ const useMusicStore = create((set, get) => ({
   audio: null,
   currentTime: 0,
   duration: 0,
+  musicList,
 
- 
   initAudio: (audioElement) => {
     set({ audio: audioElement });
 
@@ -16,7 +16,6 @@ const useMusicStore = create((set, get) => ({
       set({ duration: audioElement.duration });
     });
 
-    
     audioElement.addEventListener("timeupdate", () => {
       set({ currentTime: audioElement.currentTime });
     });
@@ -34,39 +33,34 @@ const useMusicStore = create((set, get) => ({
     }
   },
 
-  
   nextSong: () => {
     const { audio, currentSongIndex } = get();
-    const nextIndex = (currentSongIndex + 1) % musicLists.length;
+    const nextIndex = (currentSongIndex + 1) % musicList.length;
     if (audio) {
-      audio.src = musicLists[nextIndex].src; 
+      audio.src = musicList[nextIndex].src;
       audio.play();
     }
     set({ currentSongIndex: nextIndex, isPlaying: true });
   },
 
- 
   prevSong: () => {
     const { audio, currentSongIndex } = get();
     const prevIndex =
-      currentSongIndex === 0 ? musicLists.length - 1 : currentSongIndex - 1;
+      currentSongIndex === 0 ? musicList.length - 1 : currentSongIndex - 1;
     if (audio) {
-      audio.src = musicLists[prevIndex].src; 
+      audio.src = musicList[prevIndex].src;
       audio.play();
     }
     set({ currentSongIndex: prevIndex, isPlaying: true });
   },
 
- 
   setCurrentTime: (time) => {
     const { audio } = get();
     if (audio) {
-      audio.currentTime = time; 
-      set({ currentTime: time }); 
+      audio.currentTime = time;
+      set({ currentTime: time });
     }
   },
-
-  musicLists,
 }));
 
 export default useMusicStore;

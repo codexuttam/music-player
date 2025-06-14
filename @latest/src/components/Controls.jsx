@@ -30,7 +30,7 @@ const Controls = () => {
       <div className="relative h-1 bg-gray-700 rounded mb-4">
         <div
           className="absolute top-0 left-0 h-full bg-green-500 shadow-sm shadow-green-500 rounded"
-          style={{ width: `${(currentTime / duration) * 100}%` }} // Update width based on current time
+          style={{ width: `${(currentTime / duration) * 100}%` }} 
         >
           <span className=" absolute right-0 top-[-100%] w-3 h-3 bg-green-300 rounded-full"></span>
         </div>
@@ -41,8 +41,8 @@ const Controls = () => {
 
         <div
           className="absolute top-0 left-0 w-full h-full cursor-pointer"
-          onMouseDown={(e) => handleProgressChange(e)} // Handle mouse drag
-          onTouchStart={(e) => handleProgressChange(e.touches[0])} // Handle touch drag
+          onMouseDown={(e) => handleProgressChange(e)} 
+          onTouchStart={(e) => handleProgressChange(e.touches[0])} 
         />
       </div>
 
