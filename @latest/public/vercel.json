@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "latest/package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "buildCommand": "cd latest && npm run vercel-build",
+  "outputDirectory": "latest/dist",
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "/index.html"
+    }
+  ]
+}
