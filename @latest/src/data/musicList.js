@@ -29,7 +29,7 @@ const musicList = [
     title: "Meri Bheegi Bheege Si ",
     artist: "Kishore Kumar",
     img: "images/kishore daa.jpg",
-    src: "songs/Kahin Door Jab Din Dhal Jaye - Anand 128 Kbps.mp3.mp3",
+    src: "songs/Meri Bheegi Bheegi Si Anamika 128 Kbps.mp3",
   },
   {
     title: "Tabaah Ho Gaye ",
@@ -38,7 +38,7 @@ const musicList = [
     src: "songs/Tabaah Ho Gaye - Kalank 128 Kbps.mp3",
   },
 ];
- 
-  
+
+
 
 export default musicList;
